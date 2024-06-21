@@ -1,4 +1,4 @@
-<!-- Product Detail Modal -->
+<!-- paket Detail Modal -->
 <div class="program-modal modal fade" id="ProductDetailModal" tabindex="-1" role="dialog" aria-hidden="true"
   data-bs-keyboard="false" data-bs-backdrop="static">
     <div class="modal-dialog">
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-primary btn-xl j mt-4" data-bs-dismiss="modal" type="button"> Back to
-                                Product List</button>
+                                Paket List</button>
                         </div>
                     </div>
                 </div>

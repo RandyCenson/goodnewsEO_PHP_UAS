@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AuthController, HomeController, OrderController, PointController, ReviewController, ProductController, ProfileController, RajaOngkirController, TransactionController};
+use App\Http\Controllers\{AuthController, HomeController, OrderController, galleryController, ReviewController, PaketController, ProfileController, RajaOngkirController, TransactionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -52,16 +52,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/profile/change_password", "changePasswordPost");
     });
 
-    // Product
-    Route::controller(ProductController::class)->group(function () {
-        Route::get("/product", "index");
-        Route::get("/product/data/{id}", "getProductData");
+    // paket
+    Route::controller(PaketController::class)->group(function () {
+        Route::get("/paket", "index");
+        Route::get("/paket/data/{id}", "getProductData");
 
         // admin only
-        Route::get("/product/add_product", "addProductGet")->can("add_product", App\Models\Product::class);
-        Route::post("/product/add_product", "addProductPost")->can("add_product", App\Models\Product::class);
-        Route::get("/product/edit_product/{product:id}", "editProductGet")->can("edit_product", App\Models\Product::class);
-        Route::post("/product/edit_product/{product:id}", "editProductPost")->can("edit_product", App\Models\Product::class);
+        Route::get("/paket/add_product", "addProductGet")->can("add_product", App\Models\Product::class);
+        Route::post("/paket/add_product", "addProductPost")->can("add_product", App\Models\Product::class);
+        Route::get("/paket/edit_product/{product:id}", "editProductGet")->can("edit_product", App\Models\Product::class);
+        Route::post("/paket/edit_product/{product:id}", "editProductPost")->can("edit_product", App\Models\Product::class);
     });
 
     // Order
@@ -98,7 +98,7 @@ Route::middleware(['auth'])->group(function () {
 
     // review
     Route::controller(ReviewController::class)->group(function () {
-        Route::get("/review/product/{product}", "productReview");
+        Route::get("/review/paket/{product}", "productReview");
         Route::get("/review/data/{review}", "getDataReview");
         Route::post("/review/add_review/", "addReview");
         Route::post("/review/edit_review/{review}", "editReview")->can("edit_review", "review");
@@ -115,10 +115,11 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // point
-    Route::controller(PointController::class)->group(function () {
-        Route::get("/point/user_point", "user_point")->can("user_point", App\Models\User::class);
-        Route::post("/point/convert_point", "convert_point")->can("convert_point", App\Models\User::class);
-    });
+
+    // gallery page
+    Route::get('/gallery', [galleryController::class, 'generate_gallery'])->name('gallery');
+
+
 
 
     // chart

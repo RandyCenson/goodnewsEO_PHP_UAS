@@ -1,11 +1,11 @@
 @extends('/layouts/main')
 
 @push('css-dependencies')
-<link rel="stylesheet" type="text/css" href="/css/point.css" />
+<link rel="stylesheet" type="text/css" href="/css/gallery.css" />
 @endpush
 
 @push('scripts-dependencies')
-<script src="/js/point.js"></script>
+<script src="/js/gallery.js"></script>
 @endpush
 
 @section('content')
@@ -15,8 +15,15 @@
   @if(session()->has('message'))
   {!! session("message") !!}
   @endif
-
-  <div id="wrapper">
+  <h1>Image Gallery</h1>
+    <div class="product">
+        @foreach($images as $image)
+            <div class="image">
+                <img src="{{ asset( $image) }}" alt="Image">
+            </div>
+        @endforeach
+    </div>
+  {{-- <div id="wrapper">
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <div class="container-fluid mt-5">
@@ -40,6 +47,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 </div>
 @endsection

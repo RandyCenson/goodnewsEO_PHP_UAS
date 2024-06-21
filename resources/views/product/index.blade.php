@@ -1,15 +1,15 @@
 @extends('/layouts/main')
 
 @push('css-dependencies')
-<link rel="stylesheet" type="text/css" href="/css/product.css" />
+<link rel="stylesheet" type="text/css" href="/css/paket.css" />
 @endpush
 
 @push('scripts-dependencies')
-<script src="/js/product.js" type="module"></script>
+<script src="/js/paket.js" type="module"></script>
 @endpush
 
 @push('modals-dependencies')
-@include('/partials/product/product_detail_modal')
+@include('/partials/paket/paket_detail_modal')
 @endpush
 
 @section('content')
@@ -21,10 +21,10 @@
         {!! session("message") !!}
         @endif
 
-        <h5 class="section-title h1">Our Product</h5>
+        <h5 class="section-title h1">Paket Yang Kami Sedia</h5>
         @can('add_product',App\Models\Product::class)
         <div class="d-flex align-items-end flex-column mb-4">
-            <a style="text-decoration: none;" href="/product/add_product">
+            <a style="text-decoration: none;" href="/paket/add_paket">
                 <div class="text-right button-kemren mr-lg-5 mr-sm-3">pe</div>
             </a>
         </div>
@@ -41,7 +41,7 @@
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="{{ asset('storage/' . $row->image) }}"
+                                    <p><img class=" img-fluid" src="{{ asset('images\paket_cust' . $row->image) }}"
                                           alt="Product Name"></p>
                                     <h4 class="card-title">{{ $row->product_name }}</h4>
                                     <p class="card-text">{{ $row->orientation }}</p>
@@ -61,12 +61,12 @@
                                       class="btn btn-primary btn-sm detail">Detail</button>
 
                                     <!-- ulasan -->
-                                    <a href="/review/product/{{ $row->id }}"><button
+                                    <a href="/review/paket/{{ $row->id }}"><button
                                           class="btn btn-primary btn-sm ubah">Review</button></a>
 
                                     <!-- [admin] ubah -->
                                     @can('edit_product',App\Models\Product::class)
-                                    <a href="/product/edit_product/{{ $row->id }}"><button
+                                    <a href="/paket/edit_product/{{ $row->id }}"><button
                                           class="btn btn-primary btn-sm ubah">Edit</button></a>
                                     @endcan
                                     @can('create_order',App\Models\Order::class)

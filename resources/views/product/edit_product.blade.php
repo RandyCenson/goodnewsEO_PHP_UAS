@@ -1,11 +1,11 @@
 @extends('/layouts/main')
 
 @push('css-dependencies')
-<link rel="stylesheet" type="text/css" href="/css/product.css" />
+<link rel="stylesheet" type="text/css" href="/css/paket.css" />
 @endpush
 
 @push('scripts-dependencies')
-<script src="/js/product.js" type="module"></script>
+<script src="/js/paket.js" type="module"></script>
 @endpush
 
 @section('content')
@@ -40,7 +40,7 @@
                         </small></div>
                       <div class="mt-2">
                         <!-- Form -->
-                        <form id="form_edit_product" action="/product/edit_product/{{ $product->id }}" method="post"
+                        <form id="form_edit_product" action="/paket/edit_product/{{ $product->id }}" method="post"
                           enctype="multipart/form-data">
                           @csrf
                           <input type="hidden" name="oldImage" value="{{ $product->image }}">
@@ -143,7 +143,7 @@
                     </div>
                     <div class=" row">
                       <div class="col d-flex justify-content-end">
-                        <a class="btn btn-primary mx-3" href="/product">Back to Product List</a>
+                        <a class="btn btn-primary mx-3" href="/paket">Back to Product List</a>
                         <button class="btn btn-primary" type="submit" id="button_edit_product">Save Changes</button>
                       </div>
                     </div>

@@ -1,11 +1,11 @@
 @extends('/layouts.main')
 
 @push('css-dependencies')
-<link rel="stylesheet" type="text/css" href="/css/product.css" />
+<link rel="stylesheet" type="text/css" href="/css/paket.css" />
 @endpush
 
 @push('scripts-dependencies')
-<script src="/js/product.js" type="module"></script>
+<script src="/js/paket.js" type="module"></script>
 @endpush
 
 @section('content')
@@ -32,7 +32,7 @@
                           <div class="col-12 col-md-6 mb-3">
                             <div class="form-group">
                               <!-- Form -->
-                              <form action="/product/add_product" method="post" enctype="multipart/form-data">
+                              <form action="/paket/add_product" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <label for="product_name">Product Name</label>
                                 <input class="form-control @error('product_name') is-invalid @enderror" type="text"
@@ -110,7 +110,7 @@
                     </div>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
-                        <a class="btn btn-primary mx-3" href="/product">Back to Product List</a>
+                        <a class="btn btn-primary mx-3" href="/paket">Back to Product List</a>
                         <button class="btn btn-primary" type="submit">Add Product</button>
                       </div>
                     </div>
