@@ -16,7 +16,7 @@ class OrderController extends Controller
 
         return view("/order/make_order", compact("title", "product"));
     }
-
+    
 
     public function makeOrderPost(Request $request, Product $product)
     {
@@ -28,7 +28,8 @@ class OrderController extends Controller
             'city' => 'required|numeric|gt:0',
             'total_price' => 'required|gt:0',
             'shipping_address' => 'required',
-            'coupon_used' => 'required|gte:0'
+            'coupon_used' => 'required|gte:0',
+            
         ];
 
 
@@ -147,9 +148,9 @@ class OrderController extends Controller
 
         $user->coupon = $new_coupon;
 
-        if ($user->isDirty()) {
-            $user->save();
-        }
+        // if ($user->isDirty()) {
+        //     $user->save();
+        // }
     }
 
 

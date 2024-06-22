@@ -40,8 +40,11 @@
             </a>
             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="/order/order_data">Isi Form</a>
-                    <a class="nav-link" href="/order/order_history">Order History</a>
+                    <a class="nav-link" href="/form">Isi Form</a>
+                    <a class="nav-link" href="/form/show">Form History</a>
+                    {{-- <a class="nav-link" href="/form/{{ auth()->user()->id }}">Form History</a> --}}
+                    
+                    
                 </nav>
             </div>
         </div>
