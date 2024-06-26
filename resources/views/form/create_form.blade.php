@@ -1,71 +1,79 @@
-<!-- File: resources/views/order/create.blade.php -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Order Form</title>
-</head>
-<body>
-    <h1>Order Form</h1>
+@extends('/layouts/main')<!-- Jika menggunakan layout -->
 
-    @if(session('success'))
-        <div>
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <form action="{{ route('Form.store') }}" method="POST">
-        @csrf
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}">
-            @error('name')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}">
-            @error('email')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div>
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" value="{{ old('phone') }}">
-            @error('phone')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div>
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" value="{{ old('address') }}">
-            @error('address')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div>
-            <label for="party_type">Party Type:</label>
-            <input type="text" id="party_type" name="party_type" value="{{ old('party_type') }}">
-            @error('party_type')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div>
-            <label for="daerah_party">Daerah Party:</label>
-            <input type="text" id="daerah_party" name="daerah_party" value="{{ old('daerah_party') }}">
-            @error('daerah_party')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div>
-            <button type="submit">Place Order</button>
-        </div>
-    </form>
-</body>
-</html>
+@section('content')
+    <div class="container mt-5">
+        <h2>Create Form</h2>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ route('Form.create') }}" method="POST">
+            @csrf
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="party_type">Party Type</label>
+                    <input type="text" class="form-control" id="party_type" name="party_type" value="{{ old('party_type') }}" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="daerah_party">Daerah Party</label>
+                    <input type="text" class="form-control" id="daerah_party" name="daerah_party" value="{{ old('daerah_party') }}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="form_made_by">Form Made By</label>
+                    <input type="text" class="form-control" id="form_made_by" name="form_made_by" value="{{ old('form_made_by') }}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <style>
+        .form-container {
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .alert {
+            margin-top: 1rem;
+        }
+    </style>
+    <!-- Tambahkan link ke JS Bootstrap dan dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+@endsection

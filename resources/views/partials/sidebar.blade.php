@@ -9,11 +9,11 @@
             </a>
             <a class="nav-link" href="/home/customers">
                 <div class="sb-nav-link-icon"><i class="fas fa-fw fa-solid fa-users"></i></div>
-                Customers
+                users
             </a>
             <a class="nav-link" href="/transaction">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-fw fa-dollar-sign"></i></div>
-                Transaksi
+                xxxx
             </a>
             @else
             <div class="sb-sidenav-menu-heading">Customer</div>

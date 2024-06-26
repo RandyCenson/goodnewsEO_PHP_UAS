@@ -10,7 +10,8 @@ class FormController extends Controller
 {
     public function create()
     {
-        return view('/form/create_form');
+        $title = 'Create Form';
+        return view('/form/create_form', compact('title'));
     }
 
     public function store(Request $request)
@@ -53,8 +54,6 @@ class FormController extends Controller
             Form::create($data);
             $message = "Order has been created successfully!";
 
-            // Assuming you have a flash message system in place
-            // This function needs to be implemented according to your flash message library
             session()->flash('message', $message);
             session()->flash('success', true);
             
@@ -66,25 +65,13 @@ class FormController extends Controller
             
         }
     }
-    // public function showHistory()
-    // {
-    //     $forms = Form::orderBy('created_at', 'desc')->paginate(10); // Mengambil history form, misalnya 10 form per halaman
-    //     $title = 'History';
-    //     return view('form/history_form', compact('title','forms'));
-    // }
+
     public function showHistory( Request $request)
     {
-        // Ambil history form yang terkait dengan user yang sedang login
-        // $title = 'History';
-        // $forms = Form::where('user_id', auth()->user()->id);
-        
-        // return view('/form/history_form', compact('title','forms'));
 
-        // Ambil semua form yang terkait dengan user yang sedang login
         $userId = Auth::id(); // Mengambil user_id dari user yang sedang login
         $username = Auth::user()->username;
         $title = 'History of username:'.$username;
-        // $forms = Form::where('name', $userId)->get(); // Ambil semua form dengan user_id yang sesuai
 
         $forms = Form::all(); // Mengambil history form, misalnya 10 form per halaman
 
