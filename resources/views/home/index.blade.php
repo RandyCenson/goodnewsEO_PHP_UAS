@@ -20,7 +20,7 @@
 </div>
 
 @can('is_admin')
-@include('/partials/home/home_customers')
+@include('/partials/home/home_admin')
 @else
 @include('/partials/home/home_customers')
 @endcan

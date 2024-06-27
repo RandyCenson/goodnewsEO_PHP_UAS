@@ -332,7 +332,7 @@ class OrderController extends Controller
         ];
 
         // add transactional data
-        Transaction::create($transactional_data);
+        
 
         $message = "Order has been ended by admin";
         myFlasherBuilder(message: $message, success: true);

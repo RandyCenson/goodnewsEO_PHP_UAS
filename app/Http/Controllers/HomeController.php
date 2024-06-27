@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Role, User};
+use App\Models\{Role, User,AdminNote};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Middleware\Authorize;
@@ -12,8 +12,8 @@ class HomeController extends Controller
     public function index()
     {
         $title = "Home";
-
-        return view("/home/index", compact("title"));
+        $notes = AdminNote::all();
+        return view("/home/index", compact("title","notes"));
     }
 
     public function customers()

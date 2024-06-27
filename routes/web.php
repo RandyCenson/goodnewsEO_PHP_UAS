@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{DetailController,AuthController, HomeController,FormController, OrderController, galleryController, ReviewController, PaketController, ProfileController, RajaOngkirController, TransactionController};
+use App\Http\Controllers\{adminNoteController,DetailController,AuthController, HomeController,FormController, OrderController, galleryController, ReviewController, PaketController, ProfileController, RajaOngkirController, TransactionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -35,12 +35,21 @@ Route::middleware(['alreadyLogin'])->group(function () {
 
 
 
+
+
 // main
 Route::middleware(['auth'])->group(function () {
     // Home
     Route::controller(HomeController::class)->group(function () {
         Route::get("/home", "index");
         Route::get("/home/customers", "customers");
+    });
+    Route::controller(adminNoteController::class)->group(function () {
+        Route::get('/admin/notes', [adminNoteController::class, 'index'])->name('admin.notes.index');
+        Route::post('/admin/notes', [adminNoteController::class, 'store'])->name('admin.notes.store');
+        Route::delete('/admin/notes/{note}', [adminNoteController::class, 'destroy'])->name('admin.notes.destroy');
+    
+        
     });
 
     // profile
@@ -96,13 +105,6 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/form/{id}', [FormController::class, 'showForm'])->name('Form.showHistory');
         // Route::delete('/form/{id}', [FormController::class, 'deleteForm'])->name('Form.delete');
 
-    // Ongkir
-    Route::controller(RajaOngkirController::class)->group(function () {
-        Route::get("/shipping/province", "province");
-        Route::get("/shipping/city/{province_id}", "city");
-        Route::get("/shipping/cost/{origin}/{destination}/{quantity}/{courier}", "cost");
-    });
-
 
     // review
     Route::controller(ReviewController::class)->group(function () {
@@ -117,14 +119,9 @@ Route::middleware(['auth'])->group(function () {
         
     });
 
-    // transaction
-    Route::controller(TransactionController::class)->group(function () {
-        Route::get("/transaction", "index")->can("is_admin");
-        Route::get("/transaction/add_outcome", "addOutcomeGet")->can("is_admin");
-        Route::post("/transaction/add_outcome", "addOutcomePost")->can("is_admin");
-        Route::get("/transaction/edit_outcome/{transaction}", "editOutcomeGet")->can("is_admin");
-        Route::post("/transaction/edit_outcome/{transaction}", "editOutcomePost")->can("is_admin");
-    });
+
+
+
 
     // point
 

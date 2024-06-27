@@ -3,10 +3,10 @@
         <div class="nav">
             @can("is_admin")
             <div class="sb-sidenav-menu-heading">Administrator</div>
-            {{-- <a class="nav-link" href="/home">
+            <a class="nav-link" href="/home">
                 <div class="sb-nav-link-icon"><i class="fas fa-fw fa-tachometer-alt"></i></div>
                 Home
-            </a> --}}
+            </a>
             {{-- <a class="nav-link" href="/transaction">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-fw fa-dollar-sign"></i></div>
                 Gallery
