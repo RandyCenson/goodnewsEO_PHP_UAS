@@ -60,7 +60,7 @@ class AuthController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['image'] = env("IMAGE_PROFILE");
         $validatedData = array_merge($validatedData, [
-            "role_id" => 1,
+            "role_id" => 2,
             "coupon" => 0,
             "point" => 0,
             'remember_token' => Str::random(30),

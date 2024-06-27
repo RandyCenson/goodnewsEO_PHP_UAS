@@ -11,20 +11,6 @@ class Order extends Model
 
     protected $guarded = ['id'];
 
-    public function bank()
-    {
-        return $this->belongsTo(Bank::class);
-    }
-
-    public function note()
-    {
-        return $this->belongsTo(Note::class);
-    }
-
-    public function payment()
-    {
-        return $this->belongsTo(Payment::class);
-    }
 
     public function product()
     {

@@ -29,7 +29,7 @@ class PaketController extends Controller
     {
         $title = "Add Product";
 
-        return view('/paket/add_product', compact("title"));
+        return view('partials.paket.add_paket', compact("title"));
     }
 
 
@@ -48,7 +48,8 @@ class PaketController extends Controller
         if (!isset($validatedData["image"])) {
             $validatedData["image"] = env("IMAGE_PRODUCT");
         } else {
-            $validatedData["image"] = $request->file("image")->store("product");
+            $validatedData["image"] = $request->file("image")->store("product", "public");
+            
         }
 
         try {
@@ -72,6 +73,14 @@ class PaketController extends Controller
         return view("partials.paket.edit_paket", $data);
     }
 
+
+    public function deleteProduct(Product $product){
+        $paket = Product::findOrFail($product->id);
+        dd($paket);
+        $paket->delete();
+
+        // return redirect('/paket')->with('success', 'Paket deleted successfully.');
+    }
 
     public function editProductPost(Request $request, Product $product)
     {

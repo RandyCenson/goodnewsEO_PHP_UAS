@@ -22,11 +22,13 @@
         @endif
 
         <h5 class="section-title h1">Paket Yang Kami Sedia</h5>
-        @can('add_paket',App\Models\Paket::class)
+        
+        @can('is_admin')
         <div class="d-flex align-items-end flex-column mb-4">
-            <a style="text-decoration: none;" href="/paket/add_paket">
-                <div class="text-right button-kemren mr-lg-5 mr-sm-3">pe</div>
+            <a style="text-decoration: none;" href="/paket/add_product">
+                <div class="text-right button-kemren mr-lg-5 mr-sm-3">add paket</div>
             </a>
+            {{-- 'add_paket',App\Models\Paket::class --}}
         </div>
         @else
         <div class="mb-5"></div>
@@ -41,8 +43,7 @@
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="{{ asset('storage/' . $row->image) }}"
-                                          alt="{{ $row->image }}"></p>
+                                    
                                     <h4 class="card-title">{{ $row->product_name }}</h4>
                                     <p class="card-text">{{ $row->description}}></p>
                                     <div class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></div>
@@ -67,6 +68,14 @@
                                     <a href="/paket/edit_product/{{ $row->id }}"><button
                                           class="btn btn-primary btn-sm ubah">Edit</button></a>
                                     @endcan
+
+                                    <!-- [admin] hapus -->
+                                    
+                                    @can('is_admin')
+                                        <a href="/paket/delete_product/{{ $row->id }}"><button
+                                            class="btn btn-primary btn-sm ubah">delete</button></a>
+                                    @endcan
+
                                     {{-- @can('create_order',App\Models\Order::class)
                                     <a href="/order/make_order/{{ $row->id }}"><button
                                           class="btn btn-primary btn-sm ubah">Buy</button></a>

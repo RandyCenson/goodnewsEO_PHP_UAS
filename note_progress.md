@@ -34,6 +34,7 @@ gambar masih ada lokal
 composer update
 composer install
 php artisan migrate
+php artisan migrate:fresh
 php artisan db:seed
 
 php artisan storage:link

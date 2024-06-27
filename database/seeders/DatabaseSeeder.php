@@ -24,13 +24,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-            BankSeeder::class,
+            
             RoleSeeder::class,
             ProductSeeder::class,
-            NoteSeeder::class,
-            PaymentSeeder::class,
-            StatusSeeder::class,
-            CategorySeeder::class
+            
+            
         ]);
     }
 }

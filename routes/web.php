@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/paket/add_product", "addProductPost")->can("add_product", App\Models\Product::class);
         Route::get("/paket/edit_product/{product:id}", "editProductGet")->can("edit_product", App\Models\Product::class);
         Route::post("/paket/edit_product/{product:id}", "editProductPost")->can("edit_product", App\Models\Product::class);
+        
     });
 
     // Order
@@ -126,9 +127,9 @@ Route::middleware(['auth'])->group(function () {
     // point
 
     // gallery page
-    Route::get('/gallery', [galleryController::class, 'generate_gallery'])->name('gallery');
+    Route::get('/gallery', [galleryController::class, 'index'])->name('gallery');
 
-
+    Route::get('/paket/delete_product/{id}', [PaketController::class, 'deleteProduct'])->can("delete_product", App\Models\Product::class);
 
 
     // chart
