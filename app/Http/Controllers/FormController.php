@@ -73,7 +73,7 @@ class FormController extends Controller
         $username = Auth::user()->username;
         $title = 'History of username:'.$username;
 
-        $forms = Form::all(); // Mengambil history form, misalnya 10 form per halaman
+        $forms = Form::select('*')->where('user_id', $userId); // Mengambil history form, misalnya 10 form per halaman
 
         return view('/form/history_form', compact('title','forms'));
     }

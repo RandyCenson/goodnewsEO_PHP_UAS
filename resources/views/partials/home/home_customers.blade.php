@@ -4,14 +4,19 @@
       <div class="col-md-6 pt-5 pt-lg-0 order-md-1 d-flex flex-column justify-content-center" data-aos="fade-up">
         <div>
           <h1>GoodnewsEO</h1>
+
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur nobis vero a officiis commodi, nam esse
             saepe sapiente hic exercitationem reiciendis eveniet ipsa alias accusamus? Non molestias nesciunt
             accusantium suscipit?</p>
+            
           <a href="#about" class="btn-get-started scrollto">Get Started</a>
         </div>
       </div>
       <div class="col-md-6 order-md-2 mt-5 mt-lg-0 pt-5 pt-lg-0 d-none d-md-block hero-img" data-aos="fade-left">
         <img src="{{ asset('images\home_cust\template2.jpg') }}" class="img-fluid" alt="Coffee">
+        @can('is_admin')
+        <a href="/edit/image/1">edit</a>
+        @endcan
       </div>
     </div>
   </div>
@@ -29,6 +34,9 @@
         <div class="col-lg-5 col-md-6 d-none d-md-block">
           <div class="about-img" data-aos="fade-right" data-aos-delay="100">
             <img src="{{ asset('images\home_cust\template2.jpg') }}" alt="laracoffee">
+            @can('is_admin')
+            <a href="/edit/image/1">edit</a>
+            @endcan
           </div>
         </div>
 

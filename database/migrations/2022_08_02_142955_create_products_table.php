@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('discount');
             $table->string('image');
             $table->timestamps();
+            
         });
     }
 

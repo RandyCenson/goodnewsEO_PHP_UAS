@@ -11,9 +11,9 @@ class PaketController extends Controller
     public function index()
     {
         $title = "Product";
-        $product = Product::all();
+        $paket = Product::all();
 
-        return view('/product/index', compact("title", "product"));
+        return view('partials.paket.index', compact("title", "paket"));
     }
 
 
@@ -29,7 +29,7 @@ class PaketController extends Controller
     {
         $title = "Add Product";
 
-        return view('/product/add_product', compact("title"));
+        return view('/paket/add_product', compact("title"));
     }
 
 
@@ -57,7 +57,7 @@ class PaketController extends Controller
 
             myFlasherBuilder(message: $message, success: true);
 
-            return redirect('/product');
+            return redirect('/paket');
         } catch (\Illuminate\Database\QueryException $exception) {
             return abort(500);
         }
@@ -69,7 +69,7 @@ class PaketController extends Controller
         $data["title"] = "Edit Product";
         $data["product"] = $product;
 
-        return view("/product/edit_product", $data);
+        return view("partials.paket.edit_paket", $data);
     }
 
 
@@ -111,7 +111,7 @@ class PaketController extends Controller
                 $message = "Product has been updated!";
 
                 myFlasherBuilder(message: $message, success: true);
-                return redirect("/product");
+                return redirect("/paket");
             } else {
                 $message = "Action <strong>failed</strong>, no changes detected!";
 

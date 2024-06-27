@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AuthController, HomeController,FormController, OrderController, galleryController, ReviewController, PaketController, ProfileController, RajaOngkirController, TransactionController};
+use App\Http\Controllers\{DetailController,AuthController, HomeController,FormController, OrderController, galleryController, ReviewController, PaketController, ProfileController, RajaOngkirController, TransactionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +111,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/review/add_review/", "addReview");
         Route::post("/review/edit_review/{review}", "editReview")->can("edit_review", "review");
         Route::post("/review/delete_review/{review}", "deleteReview")->can("delete_review", "review");
+    });
+    Route::controller(DetailController::class)->group(function () {
+        Route::get("/detail/paket/{product}", "productDetail");
+        
     });
 
     // transaction
