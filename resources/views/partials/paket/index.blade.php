@@ -43,6 +43,8 @@
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
+                                    {{-- <p><img class=" img-fluid" src="{{ asset('storage/' . $row->image) }}"
+                                        alt="Product Name"></p> --}}
                                     
                                     <h4 class="card-title">{{ $row->product_name }}</h4>
                                     <p class="card-text">{{ $row->description}}></p>
