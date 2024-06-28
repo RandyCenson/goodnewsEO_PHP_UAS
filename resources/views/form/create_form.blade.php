@@ -1,79 +1,114 @@
-@extends('/layouts/main')<!-- Jika menggunakan layout -->
+@extends('/layouts/auth') <!-- Menggunakan layout 'auth' dari folder layouts -->
 
-@section('content')
-    <div class="container mt-5">
-        <h2>Create Form</h2>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+@push('css-dependencies')
+<link href="/css/auth.css" rel="stylesheet" /> <!-- Menambahkan stylesheet auth.css ke dalam stack css-dependencies -->
+@endpush
+
+@section("content") <!-- Mendefinisikan bagian 'content' yang akan menggantikan placeholder 'content' di layout 'auth' -->
+<div class="container pb-2">
+
+    <div class="card o-hidden border-0 shadow-lg my-5 col-lg-7 mx-auto"> <!-- Membuat card dengan border dan shadow, ditempatkan di tengah halaman -->
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg"> <!-- Kolom yang berisi form registrasi -->
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">{{ $title }} Page</h1> <!-- Menampilkan judul halaman dinamis dengan variabel $title -->
+                        </div>
+
+                        @if(session()->has('message'))
+                        {!! session("message") !!} <!-- Menampilkan pesan dari session jika ada -->
+                        @endif
+
+                        <form class="user" method="post" action="/auth/register"> <!-- Form registrasi -->
+                            @csrf <!-- Token CSRF untuk keamanan -->
+                            <div class="form-group">
+                                <input type="text" class="form-control @error('fullname') is-invalid @enderror"
+                                  id="fullname" name="fullname" placeholder="Full Name" value="{{ old('fullname') }}"> <!-- Input untuk nama lengkap -->
+                                @error('fullname')
+                                <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan error jika ada -->
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                  id="username" name="username" placeholder="Username" value="{{ old('username') }}"> <!-- Input untuk username -->
+                                @error('username')
+                                <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan error jika ada -->
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
+                                  name="email" placeholder="Email Address" value="{{ old('email') }}"> <!-- Input untuk email -->
+                                @error('email')
+                                <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan error jika ada -->
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                      id="password" name="password" placeholder="Password" data-toggle="password"> <!-- Input untuk password -->
+                                    @error('password')
+                                    <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan error jika ada -->
+                                    @enderror
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password"
+                                      class="form-control @error('password_confirmation') is-invalid @enderror"
+                                      id="password_confirmation" name="password_confirmation"
+                                      placeholder="Password Confirmation" data-toggle="password"> <!-- Input untuk konfirmasi password -->
+                                    @error('password_confirmation')
+                                    <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan error jika ada -->
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="ml-2">Gender</div> <!-- Label untuk pilihan gender -->
+                            <div class="form-check ml-3">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="M" {{
+                                  old('gender')=="M" ? 'checked' : '' }}> <!-- Input radio untuk gender laki-laki -->
+                                <label class="form-check-label" for="male">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="form-check ml-3">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="F" {{
+                                  old('gender')=="F" ? 'checked' : '' }}> <!-- Input radio untuk gender perempuan -->
+                                <label class="form-check-label" for="female">
+                                    Female
+                                </label>
+                                @error('gender')
+                                <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan error jika ada -->
+                                @enderror
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone"
+                                  name="phone" placeholder="Phone" value="{{ old('phone') }}"> <!-- Input untuk nomor telepon -->
+                                @error('phone')
+                                <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan error jika ada -->
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                  id="address" name="address" placeholder="Address" value="{{ old('address') }}"> <!-- Input untuk alamat -->
+                                @error('address')
+                                <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan error jika ada -->
+                                @enderror
+                            </div>
+                            <input type="hidden" name="role_id" value="2" /> <!-- Menyembunyikan input untuk role_id, role 2 untuk customer -->
+                            <button type="submit" class="btn btn-info btn-block">
+                                Submit
+                            </button> <!-- Tombol submit -->
+                        </form>
+
+                        <hr>
+
+                        <div class="text-center">
+                            <a class="small" href="/auth/login">Already have account? Login now!</a> <!-- Tautan untuk pengguna yang sudah memiliki akun untuk login -->
+                        </div>
+                    </div>
+                </div>
             </div>
-        @endif
-        <form action="{{ route('Form.create') }}" method="POST">
-            @csrf
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="phone">Phone</label>
-                    <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="party_type">Party Type</label>
-                    <input type="text" class="form-control" id="party_type" name="party_type" value="{{ old('party_type') }}" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="daerah_party">Daerah Party</label>
-                    <input type="text" class="form-control" id="daerah_party" name="daerah_party" value="{{ old('daerah_party') }}" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="form_made_by">Form Made By</label>
-                    <input type="text" class="form-control" id="form_made_by" name="form_made_by" value="{{ old('form_made_by') }}">
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
     </div>
-    <style>
-        .form-container {
-            margin: 0 auto;
-            max-width: 800px;
-        }
-        .form-group label {
-            font-weight: bold;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .alert {
-            margin-top: 1rem;
-        }
-    </style>
-    <!-- Tambahkan link ke JS Bootstrap dan dependencies -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-@endsection
+
+</div>
+@endsection <!-- Menutup bagian 'content' -->
