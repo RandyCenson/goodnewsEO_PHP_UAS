@@ -86,7 +86,7 @@ class PaketController extends Controller
 
     public function deleteProduct(Product $product){
         $paket = Product::findOrFail($product->id);
-        dd($paket);
+       
         $paket->delete();
 
         // return redirect('/paket')->with('success', 'Paket deleted successfully.');
